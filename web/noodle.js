@@ -11,6 +11,7 @@ window.onload = () => {
 
 create_graph = (data) => {
     const DAY = 1000 * 60 * 60 * 24;
+
     const plot_elem = document.getElementById("main_graph");
     Plotly.newPlot(
         plot_elem,
@@ -46,7 +47,15 @@ create_graph = (data) => {
             marker: {
                 color: 'rgba(214, 39, 40, 1)'
             }
-
+        },
+        {
+            name: "photos",
+            mode: "markers",
+            x: data["images"].map(img => img["date"]),
+            y: get_stacked_ys(data["images"].map(img => img["date"])),
+            marker: {
+                color: "rgba(245, 182, 66, 1)",
+            }
         }
     ],
         {
@@ -54,7 +63,8 @@ create_graph = (data) => {
             margin: {t: 0},
             yaxis: {
                 title: "weight [g] | food weight [g / 10]",
-            }
+            },
+            legend: {"orientation": "h"}
         }
     );
     plot_elem.on("plotly_click", click_data => {
@@ -68,6 +78,19 @@ create_graph = (data) => {
         });
     });
     window.onresize = () => Plotly.Plots.resize(plot_elem);
+}
+
+get_stacked_ys = (xs) => {
+    const ys = [];
+    let y = 1;
+    let last_x = null;
+    for (x of xs) {
+        if (x == last_x) {y += 1;}
+        else {y = 1;}
+        ys.push(y);
+        last_x= x;
+    }
+    return ys;
 }
 
 find_closest_img_before = (images, target_date) => {
