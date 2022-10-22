@@ -17,13 +17,17 @@ create_graph = (data) => {
         [{
             name: "weight",
             x: data["weight"]["date"],
-            y: data["weight"]["weight"]
+            y: data["weight"]["weight"],
+            hoverinfo: "x+text",
+            hovertext: data["weight"]["weight"].map(x => `${x.toFixed(2)} g`),
         },
         {
             name: "food accepted",
             type: "bar",
             x: data["feeding_accepted"]["date"],
             y: data["feeding_accepted"]["food_weight"].map(x => x * 10),
+            hoverinfo: "x+text",
+            hovertext: data["feeding_accepted"]["food_weight"].map(x => `${x.toFixed(2)} g`),
             width: 1.5 * DAY,
             marker: {
                 color: 'rgba(44, 160, 44, 1)',
@@ -36,6 +40,8 @@ create_graph = (data) => {
             type: "bar",
             x: data["feeding_rejected"]["date"],
             y: data["feeding_rejected"]["food_weight"].map(x => x * 10),
+            hoverinfo: "x+text",
+            hovertext: data["feeding_rejected"]["food_weight"].map(x => `${x.toFixed(2)} g`),
             width: 1.5 * DAY,
             marker: {
                 color: 'rgba(214, 39, 40, 1)'
