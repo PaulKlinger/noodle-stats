@@ -4,6 +4,8 @@ window.onload = () => {
     .then((data) => {
         create_graph(data);
         populate_images(data["images"]);
+        // images change layout, so resize plot to fit
+        window.onresize();
     })
 }
 

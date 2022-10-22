@@ -2,22 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=650, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
+    <title>Noodle Stats</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+    <script src="noodle.js"></script>
   </head>
   <body>
-  <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
-	<script src="noodle.js"></script>
-
-   <div id="main_graph"></div>
-   <div id="image_container">
-    <div id="image_scroller"></div>
-    <div id="full_image_container">
-      <img id="full_image">
+    <div id="main_container">
+      <div id="graph_and_photo_timeline">
+        <div id="main_graph"></div>
+        <div id="image_scroller"></div>
+      </div>
+      <div id="image_container">
+        <div id="full_image_container">
+          <img id="full_image">
+        </div>
+      </div>
     </div>
-  </div>
    <footer><a class="attribution" href="https://www.flaticon.com/free-icons/snake" title="snake icons">Snake icons created by Freepik - Flaticon</a></footer>
   </body>
 </html>
