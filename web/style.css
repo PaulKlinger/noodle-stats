@@ -4,8 +4,11 @@ html {
 
 body {
     width: 100%;
+    min-height: 100vh;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 footer {
@@ -22,6 +25,7 @@ footer {
 }
 
 #main_container {
+    flex-grow: 1;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -32,6 +36,7 @@ footer {
 
 #graph_and_photo_timeline {
     min-width: 500px;
+    max-height: 100vh;
     flex-basis: 60%;
     flex-grow: 3;
     padding: 20px;
@@ -42,14 +47,16 @@ footer {
 
 #main_graph {
     min-height: 300px;
+    max-height: 800px;
     width: 100%; 
     flex-grow: 1;
-    margin: auto;
+    margin: 0;
     box-sizing: border-box;
 }
 
 #image_scroller {
     height: 240px;
+    min-height: 240px;
     width: 100%;
     white-space: nowrap;
     overflow-x: scroll;
@@ -59,6 +66,7 @@ footer {
 
 #image_container {
     flex-basis: 40%;
+    max-height: 100vh;
     flex-grow: 2;
     padding: 20px;
     box-sizing: border-box;
@@ -67,6 +75,7 @@ footer {
 #full_image_container {
     min-width: 600px;
     max-width: 1000px;
+    height: 100%;
     margin: auto;
 }
 
@@ -75,6 +84,8 @@ footer {
     border-style: solid;
     border-radius: 20px;
     width: 100%;
+    max-height: 100%;
+    object-fit: cover;
     margin: auto;
 }
 
