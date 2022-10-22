@@ -49,11 +49,27 @@ create_graph = (data) => {
             }
         }
     );
-    plot_elem.on("plotly_click", data => {
-        const date = data.points[0].x;
-
+    plot_elem.on("plotly_click", click_data => {
+        const date = click_data.points[0].x;
+        closest_image = find_closest_img_before(data["images"], date);
+        closest_image["thumbnail_elem"].onclick();
+        closest_image["thumbnail_elem"].scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center",
+        });
     });
     window.onresize = () => Plotly.Plots.resize(plot_elem);
+}
+
+find_closest_img_before = (images, target_date) => {
+    let closest_image = images[0];
+    for (const img of images) {
+        if (img["date"] > target_date) {
+            return closest_image;
+        }
+        closest_image = img;
+    }
 }
 
 populate_images = (images) => {
