@@ -3,9 +3,8 @@ window.onload = () => {
     .then(response => response.json())
     .then((data) => {
         create_graph(data);
-        populate_images(data);
+        populate_images(data["images"]);
     })
-
 }
 
 create_graph = (data) => {
@@ -51,18 +50,29 @@ create_graph = (data) => {
         }
     );
     plot_elem.on("plotly_click", data => {
-        console.log(data.points);
+        const date = data.points[0].x;
+
     });
+    window.onresize = () => Plotly.Plots.resize(plot_elem);
 }
 
-populate_images = (data) => {
-    img_container = document.getElementById("images")
-    data["images"].forEach(x => {
-        console.log(x);
-        const img = document.createElement("img");
-        img.setAttribute("src", "./data/thumbnails/" + x["fname"]);
-        img.setAttribute("class", "image");
-        img_container.append(img);
-        x["thumbnail_elem"] = img;
-    })
+populate_images = (images) => {
+    const img_scroller = document.getElementById("image_scroller");
+    const full_image = document.getElementById("full_image");
+    let selected_thumbnail;
+    for (const img of images) {
+        const img_elem = document.createElement("img");
+        img_elem.setAttribute("src", "./data/thumbnails/" + img["fname"]);
+        img_elem.classList.add("thumbnail");
+        img_elem.onclick = () => {
+            full_image.setAttribute("src", "./data/images/" + img["fname"]);
+            selected_thumbnail.classList.remove("selected_thumbnail");
+            img_elem.classList.add("selected_thumbnail");
+            selected_thumbnail = img_elem;
+        }
+        img_scroller.append(img_elem);
+        img["thumbnail_elem"] = img_elem;
+    }
+    selected_thumbnail = images[0]["thumbnail_elem"];
+    images[0]["thumbnail_elem"].onclick();
 }
