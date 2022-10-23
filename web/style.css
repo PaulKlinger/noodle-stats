@@ -5,7 +5,7 @@ html {
 body {
     width: 100%;
     min-height: 100vh;
-    background-color: lightgray;
+    background-color: rgb(221, 221, 221);
     font-family: 'Ubuntu', sans-serif;
     padding: 0;
     margin: 0;
@@ -53,14 +53,43 @@ footer {
     box-sizing: border-box;
 }
 
+#image_scroller_container {
+    position: relative;
+    height: 270px;
+    min-height: 270px;
+    width: 100%;
+    overflow-x: clip;
+    padding: 0;
+    margin: 0;
+}
+
 #image_scroller {
+    position: relative;
     height: 270px;
     min-height: 270px;
     width: 100%;
     white-space: nowrap;
     overflow-x: scroll;
-    padding: 0;
     margin: 0;
+}
+
+#thumbnails {
+    position: relative;
+    height: 100%;
+    width: fit-content;
+    white-space: nowrap;
+    margin: 0 2% 0 2%;
+}
+
+#image_scroller_shadow{
+    background: linear-gradient(90deg, rgba(221, 221, 221, 1) 0%, rgba(255,255,255,0) 5%, rgba(255,255,255,0) 95%, rgba(221, 221, 221, 1) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    pointer-events: none;
 }
 
 #image_container {

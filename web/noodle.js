@@ -111,7 +111,7 @@ find_closest_img_before = (images, target_date) => {
 }
 
 populate_images = (images) => {
-    const img_scroller = document.getElementById("image_scroller");
+    const thumbnails_elem = document.getElementById("thumbnails");
     const full_image = document.getElementById("full_image");
     let selected_thumbnail;
     for (const img of images) {
@@ -130,7 +130,7 @@ populate_images = (images) => {
             thumb_elem.classList.add("selected_thumbnail");
             selected_thumbnail = thumb_elem;
         }
-        img_scroller.append(thumb_elem);
+        thumbnails_elem.append(thumb_elem);
         img["thumbnail_elem"] = thumb_elem;
     }
     selected_thumbnail = images[0]["thumbnail_elem"];
