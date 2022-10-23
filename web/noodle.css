@@ -12,6 +12,7 @@ body {
     min-height: 100vh;
     background-color: var(--main-bg-color);
     font-family: 'Ubuntu', sans-serif;
+    color: #333;
     padding: 0;
     margin: 0;
     display: flex;
@@ -30,6 +31,11 @@ body {
     -webkit-background-clip: text;
     filter: drop-shadow(2px 2px #666);
     color: transparent;
+}
+
+#help {
+    font-size: 12px;
+    text-align: center;
 }
 
 footer {
