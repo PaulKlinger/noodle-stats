@@ -22,7 +22,7 @@ body {
     margin: auto;
     width: fit-content;
     height: fit-content;
-    font-size: calc(min(10vh, 10vw, 100px));
+    font-size: calc(min(10vh, 10vw, 80px));
     font-family: 'MuseoModerno', sans-serif;
     background: url(./data/images/noodle_scales_bg.jpg);
     background-size: contain;
