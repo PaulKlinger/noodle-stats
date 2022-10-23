@@ -13,6 +13,11 @@ preprocess_data = (data) => {
     for (const [index, img] of data["images"].entries()) {
         img["index"] = index;
     }
+    const shedding_x = [];
+    for (const [start, end] of data["shedding"]) {
+        shedding_x.push(start, end, NaN);
+    }
+    data["shedding_x"] = shedding_x;
 }
 
 create_graph = (data) => {
@@ -70,6 +75,19 @@ create_graph = (data) => {
                 color: "rgb(66, 164, 245)",
                 size: 10
             },
+        },
+        {
+            name: "shedding",
+            type: "scattergl",
+            mode: "lines+markers",
+            x: data["shedding_x"],
+            y: data["shedding_x"].map(x => 0.5),
+            marker: {
+                color: "#333",
+                size: 10,
+                symbol: "x",
+            },
+            line: {color: "#333"},
         },
         {
             name: "weight [g]",
