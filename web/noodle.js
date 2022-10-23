@@ -24,7 +24,7 @@ create_graph = (data) => {
         plot_elem,
         [
         {
-            name: "food accepted",
+            name: "food accepted [g / 10]",
             type: "bar",
             x: data["feeding_accepted"]["date"],
             y: data["feeding_accepted"]["food_weight"].map(x => x * 10),
@@ -38,7 +38,7 @@ create_graph = (data) => {
 
         },
         {
-            name: "food rejected",
+            name: "food rejected [g / 10]",
             type: "bar",
             x: data["feeding_rejected"]["date"],
             y: data["feeding_rejected"]["food_weight"].map(x => x * 10),
@@ -73,7 +73,7 @@ create_graph = (data) => {
             },
         },
         {
-            name: "weight",
+            name: "weight [g]",
             type: "scattergl",
             x: data["weight"]["date"],
             y: data["weight"]["weight"],
@@ -83,10 +83,15 @@ create_graph = (data) => {
         },
     ],
         {
+            margin: {b: 0, r: 0, t: 0, l: 30},
             responsive: true,
-            margin: {t: 0, b: 0, l: 0, r: 0},
             yaxis: {
-                title: "weight [g] | food weight [g / 10]",
+                dtick: 10,
+                tick0: 0,
+                tickformat: ".0f",
+                tickmode: "linear",
+                ticklabelstep: 1,
+                showticklabels: true,
             },
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
