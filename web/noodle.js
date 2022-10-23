@@ -65,11 +65,13 @@ create_graph = (data) => {
     ],
         {
             responsive: true,
-            margin: {t: 0},
+            margin: {t: 0, b: 0, l: 0, r: 0},
             yaxis: {
                 title: "weight [g] | food weight [g / 10]",
             },
-            legend: {"orientation": "h"}
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            legend: {"orientation": "h"},
         }
     );
     plot_elem.on("plotly_click", click_data => {
