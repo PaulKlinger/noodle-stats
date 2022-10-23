@@ -15,7 +15,7 @@ preprocess_data = (data) => {
     }
     const shedding_x = [];
     for (const [start, end] of data["shedding"]) {
-        shedding_x.push(start, end, NaN);
+        shedding_x.push(start, end, null);
     }
     data["shedding_x"] = shedding_x;
 }
@@ -55,7 +55,7 @@ create_graph = (data) => {
         },
         {
             name: "photos",
-            type: "scattergl",
+            type: "scatter",
             mode: "markers",
             x: data["images"].map(img => img["date"]),
             y: get_stacked_ys(data["images"].map(img => img["date"])),
@@ -66,8 +66,22 @@ create_graph = (data) => {
             customdata: data["images"]
         },
         {
+            name: "shedding",
+            type: "scatter",
+            mode: "lines+markers",
+            connectgaps: false,
+            x: data["shedding_x"],
+            y: data["shedding_x"].map(x => x === null ? null : -1),
+            marker: {
+                color: "#333",
+                size: 10,
+                symbol: "x",
+            },
+            line: {color: "#333"},
+        },
+        {
             name: "selected photo",
-            type: "scattergl",
+            type: "scatter",
             mode: "markers",
             x: [data["images"][0]["date"]],
             y: [1],
@@ -77,21 +91,8 @@ create_graph = (data) => {
             },
         },
         {
-            name: "shedding",
-            type: "scattergl",
-            mode: "lines+markers",
-            x: data["shedding_x"],
-            y: data["shedding_x"].map(x => 0.5),
-            marker: {
-                color: "#333",
-                size: 10,
-                symbol: "x",
-            },
-            line: {color: "#333"},
-        },
-        {
             name: "weight [g]",
-            type: "scattergl",
+            type: "scatter",
             x: data["weight"]["date"],
             y: data["weight"]["weight"],
             hoverinfo: "x+text",
@@ -135,7 +136,7 @@ create_graph = (data) => {
 
 set_highlight_photo_marker = (i) => {
     const plot_elem = document.getElementById("main_graph");
-    Plotly.restyle(plot_elem, {"x[0]": plot_elem.data[2].x[i], "y[0]": plot_elem.data[2].y[i]}, 3);
+    Plotly.restyle(plot_elem, {"x[0]": plot_elem.data[2].x[i], "y[0]": plot_elem.data[2].y[i]}, 4);
 }
 
 get_stacked_ys = (xs) => {
