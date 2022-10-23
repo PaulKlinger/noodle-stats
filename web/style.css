@@ -1,3 +1,8 @@
+:root {
+    --main-bg-color: rgb(252, 215, 136);
+    --select-color: rgb(66, 164, 245);
+  }
+
 html {
     width: 100%;
 }
@@ -5,7 +10,7 @@ html {
 body {
     width: 100%;
     min-height: 100vh;
-    background-color: rgb(221, 221, 221);
+    background-color: var(--main-bg-color);
     font-family: 'Ubuntu', sans-serif;
     padding: 0;
     margin: 0;
@@ -17,7 +22,7 @@ body {
     margin: auto;
     width: fit-content;
     height: fit-content;
-    font-size: 100px;
+    font-size: calc(min(100% + 10vw, 100px));
     font-family: 'MuseoModerno', sans-serif;
     background: url(./data/images/noodle_scales_bg.jpg);
     background-size: contain;
@@ -27,15 +32,11 @@ body {
     color: transparent;
 }
 
-footer {
-    padding: 20px;
+footer {padding-left: 20px;}
+
+footer a, footer span {
     box-sizing: border-box;
     bottom: 0;
-    width: 100%;
-    height: 50px;
-}
-
-.attribution {
     color:darkgray;
     font-size: smaller;
 }
@@ -48,13 +49,15 @@ footer {
     align-items: stretch;
     width: 100%;
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 #graph_and_photo_timeline {
-    min-width: 500px;
+    width: calc(min(500px, 100vw));
     flex-basis: 60%;
     flex-grow: 3;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -62,15 +65,13 @@ footer {
 
 #main_graph {
     width: 100%; 
-    aspect-ratio: 2 / 1;
     margin: 0;
     box-sizing: border-box;
+    height: calc(min(100vw, 500px))
 }
 
 #image_scroller_container {
     position: relative;
-    height: 270px;
-    min-height: 270px;
     width: 100%;
     overflow-x: clip;
     padding: 0;
@@ -79,8 +80,6 @@ footer {
 
 #image_scroller {
     position: relative;
-    height: 270px;
-    min-height: 270px;
     width: 100%;
     white-space: nowrap;
     overflow-x: scroll;
@@ -96,7 +95,7 @@ footer {
 }
 
 #image_scroller_shadow{
-    background: linear-gradient(90deg, rgba(221, 221, 221, 1) 0%, rgba(255,255,255,0) 5%, rgba(255,255,255,0) 95%, rgba(221, 221, 221, 1) 100%);
+    background: linear-gradient(90deg, var(--main-bg-color) 0%, rgba(255,255,255,0) 5%, rgba(255,255,255,0) 95%, var(--main-bg-color) 100%);
     position: absolute;
     top: 0;
     left: 0;
@@ -107,15 +106,15 @@ footer {
 }
 
 #image_container {
-    flex-basis: 40%;
+    max-width: 100vw;
     max-height: 100vh;
+    flex-basis: 40%;
     flex-grow: 2;
     padding: 20px;
     box-sizing: border-box;
 }
 
 #full_image_container {
-    min-width: 600px;
     max-width: 1000px;
     height: 100%;
     margin: auto;
@@ -126,7 +125,7 @@ footer {
     border-radius: 20px;
     border-width: 0;
     max-width: 100%;
-    max-height: 100%;
+    max-height: 90vh;
     object-fit: scale-down;
     margin: auto;
 }
@@ -149,7 +148,7 @@ footer {
 }
 
 .selected_thumbnail .thumbnail_img {
-    outline: 6px solid rgb(66, 224, 245);
+    outline: 6px solid var(--select-color);
 }
 
 .thumbnail_img {
@@ -158,8 +157,7 @@ footer {
     margin: auto;
     border-radius: 20px;
     border-width: 0;
-    max-width: 200px;
+    max-width: 33vw;
     max-height: 200px;
-    width: auto;
     height: auto;
 }

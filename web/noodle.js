@@ -3,10 +3,9 @@ window.onload = () => {
     .then(response => response.json())
     .then((data) => {
         preprocess_data(data);
-        create_graph(data);
         populate_images(data["images"]);
-        // images change layout, so resize plot to fit
-        window.onresize();
+        create_graph(data);
+        data["images"][0]["thumbnail_elem"].onclick();
     })
 }
 
@@ -56,7 +55,7 @@ create_graph = (data) => {
             x: data["images"].map(img => img["date"]),
             y: get_stacked_ys(data["images"].map(img => img["date"])),
             marker: {
-                color: data["images"].map(img => "rgb(245, 182, 66)"),
+                color: "rgb(245, 158, 37)",
                 size: 10
             },
             customdata: data["images"]
@@ -68,7 +67,7 @@ create_graph = (data) => {
             x: [data["images"][0]["date"]],
             y: [1],
             marker: {
-                color: "rgb(66, 224, 245)",
+                color: "rgb(66, 164, 245)",
                 size: 10
             },
         },
@@ -95,7 +94,7 @@ create_graph = (data) => {
             },
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
-            legend: {"orientation": "h"},
+            legend: {"orientation": "h", "font": {"size": 11}},
         }
     );
     plot_elem.on("plotly_click", click_data => {
@@ -172,5 +171,4 @@ populate_images = (images) => {
         img["thumbnail_elem"] = thumb_elem;
     }
     selected_thumbnail = images[0];
-    images[0]["thumbnail_elem"].onclick();
 }
