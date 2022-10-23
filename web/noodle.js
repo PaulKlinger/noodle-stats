@@ -147,7 +147,7 @@ populate_images = (images) => {
     for (const img of images) {
         const thumb_elem = document.createElement("div");
         const thumb_img_elem = document.createElement("img");
-        thumb_img_elem.setAttribute("src", "./data/thumbnails/" + img["fname"]);
+        thumb_img_elem.setAttribute("src", "./data/photos/thumbnails/" + img["fname"]);
         thumb_img_elem.classList.add("thumbnail_img");
         const date_text = document.createElement("p");
         date_text.append(img["date"]);
@@ -158,7 +158,7 @@ populate_images = (images) => {
             // highlight corresponding marker in plot
             set_highlight_photo_marker(img["index"]);
 
-            full_image.setAttribute("src", "./data/images/" + img["fname"]);
+            full_image.setAttribute("src", "./data/photos/full_res/" + img["fname"]);
             selected_thumbnail["thumbnail_elem"].classList.remove("selected_thumbnail");
             thumb_elem.classList.add("selected_thumbnail");
             selected_thumbnail = img;
