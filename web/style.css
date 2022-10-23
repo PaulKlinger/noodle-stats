@@ -5,6 +5,7 @@ html {
 body {
     width: 100%;
     min-height: 100vh;
+    font-family: 'Ubuntu', sans-serif;
     padding: 0;
     margin: 0;
     display: flex;
@@ -55,8 +56,8 @@ footer {
 }
 
 #image_scroller {
-    height: 240px;
-    min-height: 240px;
+    height: 270px;
+    min-height: 270px;
     width: 100%;
     white-space: nowrap;
     overflow-x: scroll;
@@ -90,18 +91,34 @@ footer {
 }
 
 .thumbnail {
+    display: inline-block;
+    position: relative;
     border-radius: 20px;
     border-width: 0;
     margin: 5px;
+    max-height: 220px;
+    width: fit-content;
+}
+
+.thumbnail p {
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    text-align: center;
+}
+
+.selected_thumbnail .thumbnail_img {
+    outline: 3px solid rgba(245, 182, 66, 1);
+}
+
+.thumbnail_img {
+    box-sizing: border-box;
+    padding: 0;
+    margin: auto;
+    border-radius: 20px;
+    border-width: 0;
     max-width: 200px;
     max-height: 200px;
     width: auto;
     height: auto;
-}
-
-.selected_thumbnail {
-    border-style: solid;
-    border-width: 3px;
-    margin-top: 2px;
-    margin-bottom: 2px;
 }

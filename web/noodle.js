@@ -15,13 +15,7 @@ create_graph = (data) => {
     const plot_elem = document.getElementById("main_graph");
     Plotly.newPlot(
         plot_elem,
-        [{
-            name: "weight",
-            x: data["weight"]["date"],
-            y: data["weight"]["weight"],
-            hoverinfo: "x+text",
-            hovertext: data["weight"]["weight"].map(x => `${x.toFixed(2)} g`),
-        },
+        [
         {
             name: "food accepted",
             type: "bar",
@@ -50,13 +44,24 @@ create_graph = (data) => {
         },
         {
             name: "photos",
+            type: "scattergl",
             mode: "markers",
             x: data["images"].map(img => img["date"]),
             y: get_stacked_ys(data["images"].map(img => img["date"])),
             marker: {
                 color: "rgba(245, 182, 66, 1)",
-            }
-        }
+            },
+
+        },
+        {
+            name: "weight",
+            type: "scattergl",
+            x: data["weight"]["date"],
+            y: data["weight"]["weight"],
+            hoverinfo: "x+text",
+            hovertext: data["weight"]["weight"].map(x => `${x.toFixed(2)} g`),
+            line: {color: "rgb(31, 119, 180)"},
+        },
     ],
         {
             responsive: true,
@@ -108,17 +113,23 @@ populate_images = (images) => {
     const full_image = document.getElementById("full_image");
     let selected_thumbnail;
     for (const img of images) {
-        const img_elem = document.createElement("img");
-        img_elem.setAttribute("src", "./data/thumbnails/" + img["fname"]);
-        img_elem.classList.add("thumbnail");
-        img_elem.onclick = () => {
+        const thumb_elem = document.createElement("div");
+        const thumb_img_elem = document.createElement("img");
+        thumb_img_elem.setAttribute("src", "./data/thumbnails/" + img["fname"]);
+        thumb_img_elem.classList.add("thumbnail_img");
+        const date_text = document.createElement("p");
+        date_text.append(img["date"]);
+        thumb_elem.append(thumb_img_elem);
+        thumb_elem.append(date_text);
+        thumb_elem.classList.add("thumbnail");
+        thumb_elem.onclick = () => {
             full_image.setAttribute("src", "./data/images/" + img["fname"]);
             selected_thumbnail.classList.remove("selected_thumbnail");
-            img_elem.classList.add("selected_thumbnail");
-            selected_thumbnail = img_elem;
+            thumb_elem.classList.add("selected_thumbnail");
+            selected_thumbnail = thumb_elem;
         }
-        img_scroller.append(img_elem);
-        img["thumbnail_elem"] = img_elem;
+        img_scroller.append(thumb_elem);
+        img["thumbnail_elem"] = thumb_elem;
     }
     selected_thumbnail = images[0]["thumbnail_elem"];
     images[0]["thumbnail_elem"].onclick();
