@@ -2,11 +2,18 @@ window.onload = () => {
     fetch("./data/noodle_data.json")
     .then(response => response.json())
     .then((data) => {
+        preprocess_data(data);
         create_graph(data);
         populate_images(data["images"]);
         // images change layout, so resize plot to fit
         window.onresize();
     })
+}
+
+preprocess_data = (data) => {
+    for (const [index, img] of data["images"].entries()) {
+        img["index"] = index;
+    }
 }
 
 create_graph = (data) => {
@@ -49,9 +56,21 @@ create_graph = (data) => {
             x: data["images"].map(img => img["date"]),
             y: get_stacked_ys(data["images"].map(img => img["date"])),
             marker: {
-                color: "rgba(245, 182, 66, 1)",
+                color: data["images"].map(img => "rgb(245, 182, 66)"),
+                size: 10
             },
-
+            customdata: data["images"]
+        },
+        {
+            name: "selected photo",
+            type: "scattergl",
+            mode: "markers",
+            x: [data["images"][0]["date"]],
+            y: [1],
+            marker: {
+                color: "rgb(66, 224, 245)",
+                size: 10
+            },
         },
         {
             name: "weight",
@@ -75,8 +94,13 @@ create_graph = (data) => {
         }
     );
     plot_elem.on("plotly_click", click_data => {
-        const date = click_data.points[0].x;
-        closest_image = find_closest_img_before(data["images"], date);
+        const point = click_data.points[0];
+        let closest_image;
+        if (point.data["name"] === "photos") {
+            closest_image = point.customdata;
+        } else {
+            closest_image = find_closest_img_before(data["images"], point.x);
+        }
         closest_image["thumbnail_elem"].onclick();
         closest_image["thumbnail_elem"].scrollIntoView({
             behavior: "smooth",
@@ -87,13 +111,19 @@ create_graph = (data) => {
     window.onresize = () => Plotly.Plots.resize(plot_elem);
 }
 
+set_highlight_photo_marker = (i) => {
+    const plot_elem = document.getElementById("main_graph");
+    Plotly.restyle(plot_elem, {"x[0]": plot_elem.data[2].x[i], "y[0]": plot_elem.data[2].y[i]}, 3);
+}
+
 get_stacked_ys = (xs) => {
     const ys = [];
-    let y = 1;
+    const init_y = 1;
+    let y = init_y;
     let last_x = null;
     for (x of xs) {
-        if (x == last_x) {y += 1;}
-        else {y = 1;}
+        if (x == last_x) {y += 2;}
+        else {y = init_y;}
         ys.push(y);
         last_x= x;
     }
@@ -125,14 +155,17 @@ populate_images = (images) => {
         thumb_elem.append(date_text);
         thumb_elem.classList.add("thumbnail");
         thumb_elem.onclick = () => {
+            // highlight corresponding marker in plot
+            set_highlight_photo_marker(img["index"]);
+
             full_image.setAttribute("src", "./data/images/" + img["fname"]);
-            selected_thumbnail.classList.remove("selected_thumbnail");
+            selected_thumbnail["thumbnail_elem"].classList.remove("selected_thumbnail");
             thumb_elem.classList.add("selected_thumbnail");
-            selected_thumbnail = thumb_elem;
+            selected_thumbnail = img;
         }
         thumbnails_elem.append(thumb_elem);
         img["thumbnail_elem"] = thumb_elem;
     }
-    selected_thumbnail = images[0]["thumbnail_elem"];
+    selected_thumbnail = images[0];
     images[0]["thumbnail_elem"].onclick();
 }

@@ -136,7 +136,7 @@ footer {
 }
 
 .selected_thumbnail .thumbnail_img {
-    outline: 6px solid rgba(245, 182, 66, 1);
+    outline: 6px solid rgb(66, 224, 245);
 }
 
 .thumbnail_img {
