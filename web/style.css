@@ -13,6 +13,20 @@ body {
     flex-direction: column;
 }
 
+#title {
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    font-size: 100px;
+    font-family: 'MuseoModerno', sans-serif;
+    background: url(./data/images/noodle_scales_bg.jpg);
+    background-size: contain;
+    background-clip: text;
+    -webkit-background-clip: text;
+    filter: drop-shadow(2px 2px #666);
+    color: transparent;
+}
+
 footer {
     padding: 20px;
     box-sizing: border-box;
@@ -109,12 +123,11 @@ footer {
 
 #full_image {
     display: block;
-    border-style: solid;
     border-radius: 20px;
-    width: fit-content(100%);
+    border-width: 0;
     max-width: 100%;
     max-height: 100%;
-    object-fit:scale-down;
+    object-fit: scale-down;
     margin: auto;
 }
 
