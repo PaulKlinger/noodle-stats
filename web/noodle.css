@@ -73,7 +73,7 @@ footer a, footer span {
 }
 
 #main_graph {
-    width: 100%; 
+    width: 100%;
     margin: 0;
     box-sizing: border-box;
     height: calc(min(100vw, 400px, 70vh))
