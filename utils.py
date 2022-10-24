@@ -2,6 +2,7 @@ from googleapiclient import discovery
 from httplib2 import Http
 from oauth2client import file, client, tools
 import requests
+import pysftp
 
 import os
 import shutil
@@ -57,3 +58,18 @@ class GooglePhotos:
             print(".", end="")
             output_path = os.path.join(output_folder, item["filename"])
             self.download_item(item["baseUrl"], target_width, target_height, output_path)
+
+
+def put_r_portable(sftp: pysftp.Connection, localdir: str, remotedir: str, preserve_mtime: bool = False) -> None:
+    # https://stackoverflow.com/a/58466685/7089433
+    for entry in os.listdir(localdir):
+        remotepath = remotedir + "/" + entry
+        localpath = os.path.join(localdir, entry)
+        if not os.path.isfile(localpath):
+            try:
+                sftp.mkdir(remotepath)
+            except OSError:     
+                pass
+            put_r_portable(sftp, localpath, remotepath, preserve_mtime)
+        else:
+            sftp.put(localpath, remotepath, preserve_mtime=preserve_mtime)
