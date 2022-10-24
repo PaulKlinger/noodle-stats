@@ -30,6 +30,7 @@ FTP_SECRET_SOTRAGE_ENV_VAR = "FTP_SECRET"
 
 def write_secrets_to_file():
     for secret_env, secret_path in SECRETS.items():
+        os.makedirs(os.path.dirname(secret_path), exist_ok=True)
         if secret_env in os.environ:
             with open(secret_path, "w") as f:
                 f.write(os.environ[secret_env])
