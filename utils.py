@@ -6,7 +6,7 @@ import pysftp
 
 import os
 import shutil
-from typing import Any, Iterator
+from typing import Any, Iterator, Callable
 
 
 class GooglePhotos:
@@ -53,14 +53,16 @@ class GooglePhotos:
         with open(output_path, 'wb') as out_file:
             shutil.copyfileobj(response.raw, out_file)
 
-    def download_album(self, album_title: str, output_folder: str, target_width: int, target_height: int) -> None:
+    def download_album(self, album_title: str, output_folder: str, target_width: int, target_height: int, exclude: set[str]=frozenset()) -> None:
         for item in self.get_album_contents(album_title=album_title):
+            if item["filename"] in exclude:
+                continue
             print(".", end="")
             output_path = os.path.join(output_folder, item["filename"])
             self.download_item(item["baseUrl"], target_width, target_height, output_path)
 
 
-def put_r_portable(sftp: pysftp.Connection, localdir: str, remotedir: str, preserve_mtime: bool = False) -> None:
+def put_r_portable(sftp: pysftp.Connection, localdir: str, remotedir: str, preserve_mtime: bool = False, skip_if_exists: Callable[[str], bool] = lambda p: False) -> None:
     # https://stackoverflow.com/a/58466685/7089433
     for entry in os.listdir(localdir):
         remotepath = remotedir + "/" + entry
@@ -70,6 +72,9 @@ def put_r_portable(sftp: pysftp.Connection, localdir: str, remotedir: str, prese
                 sftp.mkdir(remotepath)
             except OSError:     
                 pass
-            put_r_portable(sftp, localpath, remotepath, preserve_mtime)
+            put_r_portable(sftp, localpath, remotepath, preserve_mtime, skip_if_exists)
         else:
+            if skip_if_exists(localpath) and sftp.exists(remotepath):
+                continue
+            print(f"{localpath} -> {remotepath}")
             sftp.put(localpath, remotepath, preserve_mtime=preserve_mtime)
