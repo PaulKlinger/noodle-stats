@@ -1,7 +1,7 @@
 name: Update Site
 on:
   schedule:
-    - cron:  '27 1 * * *'
+    - cron: "27 1 * * *"
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v3
         with:
-          python-version: '3.10'
+          python-version: "3.10"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip

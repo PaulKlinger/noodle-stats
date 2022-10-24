@@ -1,176 +1,183 @@
 :root {
-    --main-bg-color: rgb(252, 215, 136);
-    --select-color: rgb(66, 164, 245);
-  }
+  --main-bg-color: rgb(252, 215, 136);
+  --select-color: rgb(66, 164, 245);
+}
 
 html {
-    width: 100%;
+  width: 100%;
 }
 
 body {
-    width: 100%;
-    min-height: 100vh;
-    background-color: var(--main-bg-color);
-    font-family: 'Ubuntu', sans-serif;
-    color: #333;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--main-bg-color);
+  font-family: "Ubuntu", sans-serif;
+  color: #333;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 #title {
-    margin: auto;
-    width: fit-content;
-    height: fit-content;
-    font-size: calc(min(10vh, 10vw, 80px));
-    font-family: 'MuseoModerno', sans-serif;
-    background: url(./data/images/noodle_scales_bg.jpg);
-    background-size: contain;
-    background-clip: text;
-    -webkit-background-clip: text;
-    filter: drop-shadow(2px 2px #666);
-    color: transparent;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  font-size: calc(min(10vh, 10vw, 80px));
+  font-family: "MuseoModerno", sans-serif;
+  background: url(./data/images/noodle_scales_bg.jpg);
+  background-size: contain;
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(2px 2px #666);
+  color: transparent;
 }
 
 #help {
-    font-size: 12px;
-    text-align: center;
+  font-size: 12px;
+  text-align: center;
 }
 
 footer {
-    padding-left: 20px;
-    padding-bottom: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
 }
 
-footer a, footer span {
-    box-sizing: border-box;
-    bottom: 0;
-    color:darkgray;
-    font-size: smaller;
+footer a,
+footer span {
+  box-sizing: border-box;
+  bottom: 0;
+  color: darkgray;
+  font-size: smaller;
 }
 
 #main_container {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: stretch;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 #graph_and_photo_timeline {
-    width: calc(min(500px, 100vw));
-    flex-basis: 60%;
-    flex-grow: 3;
-    padding: 0;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
+  width: calc(min(500px, 100vw));
+  flex-basis: 60%;
+  flex-grow: 3;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 #main_graph {
-    width: 100%;
-    margin: 0;
-    box-sizing: border-box;
-    height: calc(min(100vw, 400px, 70vh))
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  height: calc(min(100vw, 400px, 70vh));
 }
 
 #image_scroller_container {
-    position: relative;
-    width: 100%;
-    overflow-x: clip;
-    padding: 0;
-    margin: 0;
+  position: relative;
+  width: 100%;
+  overflow-x: clip;
+  padding: 0;
+  margin: 0;
 }
 
 #image_scroller {
-    position: relative;
-    width: 100%;
-    white-space: nowrap;
-    overflow-x: scroll;
-    margin: 0;
+  position: relative;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: scroll;
+  margin: 0;
 }
 
 #thumbnails {
-    position: relative;
-    height: 100%;
-    width: fit-content;
-    white-space: nowrap;
-    margin: 0 2% 0 2%;
+  position: relative;
+  height: 100%;
+  width: fit-content;
+  white-space: nowrap;
+  margin: 0 2% 0 2%;
 }
 
-#image_scroller_shadow{
-    background: linear-gradient(90deg, var(--main-bg-color) 0%, rgba(255,255,255,0) 5%, rgba(255,255,255,0) 95%, var(--main-bg-color) 100%);
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 2;
-    pointer-events: none;
+#image_scroller_shadow {
+  background: linear-gradient(
+    90deg,
+    var(--main-bg-color) 0%,
+    rgba(255, 255, 255, 0) 5%,
+    rgba(255, 255, 255, 0) 95%,
+    var(--main-bg-color) 100%
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
 }
 
 #image_container {
-    max-width: 100vw;
-    max-height: 100vh;
-    flex-basis: 40%;
-    flex-grow: 2;
-    padding: 20px;
-    box-sizing: border-box;
+  max-width: 100vw;
+  max-height: 100vh;
+  flex-basis: 40%;
+  flex-grow: 2;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 #full_image_container {
-    max-width: 1000px;
-    height: 100%;
-    margin: auto;
+  max-width: 1000px;
+  height: 100%;
+  margin: auto;
 }
 
 #full_image {
-    display: block;
-    border-radius: 20px;
-    border-width: 0;
-    max-width: 100%;
-    max-height: calc(min(90vh, 800px));
-    object-fit: scale-down;
-    margin: auto;
+  display: block;
+  border-radius: 20px;
+  border-width: 0;
+  max-width: 100%;
+  max-height: calc(min(90vh, 800px));
+  object-fit: scale-down;
+  margin: auto;
 }
 
 .thumbnail {
-    display: inline-block;
-    position: relative;
-    border-radius: 20px;
-    border-width: 0;
-    margin: 5px;
-    max-height: 220px;
-    width: fit-content;
+  display: inline-block;
+  position: relative;
+  border-radius: 20px;
+  border-width: 0;
+  margin: 5px;
+  max-height: 220px;
+  width: fit-content;
 }
 
 .thumbnail p {
-    padding: 3px;
-    margin: 0;
-    font-size: 15px;
-    margin-left: auto;
-    margin-right: auto;
-    width: fit-content;
-    border-radius: 10px;
-    background-color: rgba(202, 202, 202, 0.5);
+  padding: 3px;
+  margin: 0;
+  font-size: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  border-radius: 10px;
+  background-color: rgba(202, 202, 202, 0.5);
 }
 
 .selected_thumbnail .thumbnail_img {
-    outline: 6px solid var(--select-color);
+  outline: 6px solid var(--select-color);
 }
 
 .thumbnail_img {
-    box-sizing: border-box;
-    padding: 0;
-    margin: auto;
-    border-radius: 20px;
-    border-width: 0;
-    max-width: 33vw;
-    max-height: 200px;
-    height: auto;
+  box-sizing: border-box;
+  padding: 0;
+  margin: auto;
+  border-radius: 20px;
+  border-width: 0;
+  max-width: 33vw;
+  max-height: 200px;
+  height: auto;
 }
