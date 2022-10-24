@@ -2,6 +2,7 @@ name: Update Site
 on:
   schedule:
     - cron:  '27 1 * * *'
+  workflow_dispatch:
 
 jobs:
   generate:
