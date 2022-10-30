@@ -1,5 +1,7 @@
 # [Noodle Stats](https://almoturg.com/noodle)
 
+[![Update Site](https://github.com/PaulKlinger/noodle-stats/actions/workflows/update.yml/badge.svg)](https://github.com/PaulKlinger/noodle-stats/actions/workflows/update.yml)
+
 A website to show some statistics & photos of my Western Hognose snake Noodle. View at [almoturg.com/noodle](https://almoturg.com/noodle).
 
 I manually enter the statistics into a Google sheet, and add the photos to a google photos album.
